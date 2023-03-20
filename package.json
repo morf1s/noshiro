@@ -1,0 +1,57 @@
+{
+  "name": "noshiro",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "APP_ENV=development node . | pino-pretty",
+    "prod": "pnpm build && pnpm postbuild && node .",
+    "postbuild": "tsc-alias -p tsconfig.json"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "lavalink",
+    "discordjs",
+    "discord-js",
+    "discord.js",
+    "docker",
+    "music",
+    "discord-music-bot"
+  ],
+  "author": "Rechz <hi@zelz.my.id>",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/voice": "^0.14.0",
+    "bufferutil": "^4.0.7",
+    "chalk": "4.1.2",
+    "discord.js": "^14.8.0",
+    "dotenv": "^16.0.3",
+    "erlpack": "github:discord/erlpack",
+    "glob": "^9.2.1",
+    "kazagumo": "^2.3.2",
+    "moment-timezone": "^0.5.41",
+    "pino": "^8.11.0",
+    "pretty-ms": "7.0.1",
+    "shoukaku": "^3.3.1",
+    "tsc-alias": "^1.8.2",
+    "utf-8-validate": "^6.0.3",
+    "zlib-sync": "^0.1.8"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/node": "^18.14.6",
+    "pino-pretty": "^9.4.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "dist/*"
+    ],
+    "ext": "ts",
+    "watch": [
+      "src/*"
+    ],
+    "exec": "tsc && pnpm postbuild && pnpm dev"
+  }
+}
