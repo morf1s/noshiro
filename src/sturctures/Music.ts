@@ -3,12 +3,11 @@ import {
   CommandInteraction,
   EmbedBuilder,
   GuildMember,
-  Interaction,
   TextChannel,
   User,
 } from 'discord.js';
 import { Connectors } from 'shoukaku';
-import { Kazagumo, KazagumoPlayer } from 'Kazagumo';
+import { Kazagumo, KazagumoPlayer } from 'kazagumo';
 
 import Config from '@config';
 import Noshiro from './Noshiro';
@@ -33,7 +32,7 @@ class Music extends Kazagumo {
 
     this.shoukaku
       .on('ready', (name) =>
-        this.client.logger.info(`Shoukaku Connected to Node ${name}`)
+        this.client.logger.info(`Shoukaku Connected to ${name} node`)
       )
       .on('error', (name: string, error: Error) =>
         this.client.logger.error(error, name)

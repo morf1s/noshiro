@@ -25,7 +25,7 @@ class ComponentInteaction {
             {
               color: Colors.Red,
               description:
-                "Looks like you don't have permission to run this command",
+                'Looks like you don\'t have permission to run this command',
             },
           ],
         });
@@ -33,16 +33,13 @@ class ComponentInteaction {
       return;
     }
     this.run(ctx).catch((err: Error) =>
-      this.client.logger.error(
-        err,
-        `error running ${this.name} interaction`
-      )
+      this.client.logger.error(err, `error running ${this.name} interaction`)
     );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async run(ctx: Interaction<CacheType> | CommandInteraction<CacheType>) {
-    throw new Error(`run method is not implemented on the child class`);
+    throw new Error('run method is not implemented on the child class');
   }
 }
 

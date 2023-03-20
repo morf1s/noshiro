@@ -1,7 +1,6 @@
 import {
   Colors,
   EmbedBuilder,
-  Guild,
   GuildMember,
   StringSelectMenuInteraction,
 } from 'discord.js';

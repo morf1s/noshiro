@@ -68,7 +68,7 @@ class Loop extends InteractionCommand {
 
     console.log(player.loop, loopType);
     if (player.loop !== 'none' && !loopTypeParam) loopType = 'none';
-    // @ts-ignore
+    // @ts-expect-error: ...
     player.setLoop(loopType);
 
     const embed = new EmbedBuilder()

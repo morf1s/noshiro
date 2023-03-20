@@ -37,7 +37,7 @@ class InteractionCommand {
             {
               color: Colors.Red,
               description:
-                "Looks like you don't have permission to run this command",
+                'Looks like you don\'t have permission to run this command',
             },
           ],
         });
@@ -55,7 +55,7 @@ class InteractionCommand {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async run(ctx: Interaction<CacheType> | CommandInteraction<CacheType>) {
-    throw new Error(`run method is not implemented on the child class`);
+    throw new Error('run method is not implemented on the child class');
   }
 }
 

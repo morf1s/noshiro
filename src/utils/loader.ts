@@ -27,6 +27,7 @@ class Loader {
       delete require.cache[filePath];
 
       try {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const File = require(filePath).default;
         const Command: Command = new File(this.client);
 
@@ -64,6 +65,7 @@ class Loader {
       delete require.cache[filePath];
 
       try {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const File = require(filePath).default;
         const Command: InteractionCommand | ComponentInteaction = new File(
           this.client
@@ -97,6 +99,7 @@ class Loader {
       delete require.cache[filePath];
 
       try {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const File = require(filePath).default;
         const Event: Event = new File(this.client);
 

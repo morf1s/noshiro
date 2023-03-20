@@ -30,7 +30,7 @@ class Queue extends InteractionCommand {
       ctx.editReply({
         embeds: [
           new EmbedBuilder()
-            .setDescription(`Queue is empty`)
+            .setDescription('Queue is empty')
             .setColor(Colors.White),
         ],
       });

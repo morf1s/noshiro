@@ -7,7 +7,6 @@ import {
   EmbedBuilder,
   SlashCommandBuilder,
   StringSelectMenuBuilder,
-  MessageActionRowComponentBuilder,
 } from 'discord.js';
 import prettyMilliseconds from 'pretty-ms';
 
@@ -73,7 +72,7 @@ class Search extends InteractionCommand {
     const row = new ActionRowBuilder<StringSelectMenuBuilder>();
     const musicSelectMenu = new StringSelectMenuBuilder()
       .setCustomId('music_search_select_menu')
-      .setPlaceholder(`🎵 Select music`);
+      .setPlaceholder('🎵 Select music');
 
     for (let i = 0; i < searchRes.tracks.slice(0, 10).length; i++) {
       const track = searchRes.tracks[i];

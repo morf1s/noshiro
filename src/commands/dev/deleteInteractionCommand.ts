@@ -16,7 +16,7 @@ class DeleteInteractionCommands extends Command {
   async run(message: Message<boolean>) {
     const commands = await message.guild?.commands.fetch();
     if (!commands) {
-      message.reply(`0 commands deleted.`);
+      message.reply('0 commands deleted.');
       return;
     }
 

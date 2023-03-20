@@ -5,7 +5,7 @@ import InteractionCommand from './InteractionCommand';
 import Config from '@config';
 import Command from './Command';
 import Music from './Music';
-import Pino, { pino } from 'pino';
+import Pino from 'pino';
 import Loader from '@/utils/loader';
 import Utils from '@/utils/utils';
 import InteractionState from '@/utils/interactionState';
@@ -44,10 +44,6 @@ class Noshiro extends Client {
     return this.commands[this.aliases[name] || name];
   }
 
-  logError(obj: unknown, msg?: string, ...args: any[]) {
-    
-    return
-  }
 
   private async init() {
     for (const owner of Config.ownerIds) this.owners[owner] = true;

@@ -22,6 +22,7 @@ class Event {
     );
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async run(...args: unknown[]) {
     this.client.logger.error(
       `${this.name} run method is not implemented on the childs class.`
