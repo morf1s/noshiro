@@ -25,17 +25,17 @@ class Join extends InteractionCommand {
   async run(ctx: CommandInteraction) {
     await ctx.deferReply();
 
-    // const voiceId = (ctx.member as GuildMember)?.voice.channelId;
-    // if (!voiceId) {
-    //   ctx.editReply({
-    //     embeds: [
-    //       new EmbedBuilder().setDescription(
-    //         'You must be in a voice channel to run this command'
-    //       ),
-    //     ],
-    //   });
-    //   return;
-    // }
+    const voiceId = (ctx.member as GuildMember)?.voice.channelId;
+    if (!voiceId) {
+      ctx.editReply({
+        embeds: [
+          new EmbedBuilder().setDescription(
+            'You must be in a voice channel to run this command'
+          ),
+        ],
+      });
+      return;
+    }
 
     const me = ctx.guild?.members.cache.get(
       this.client.user?.id as string
@@ -44,15 +44,10 @@ class Join extends InteractionCommand {
     const player = await this.client.music.createPlayer({
       guildId: ctx.guildId as string,
       textId: ctx.channelId,
-      voiceId: '868075571597410344',
-      //   voiceId,
+      voiceId,
     });
 
-    // if (!me.voice.channelId || player.voiceId !== voiceId)
-    //   player.connect();
-
-    if (!me.voice.channelId || player.voiceId !== '868075571597410344')
-      player.connect();
+    if (!me.voice.channelId || player.voiceId !== voiceId) player.connect();
 
     ctx.editReply({
       embeds: [
