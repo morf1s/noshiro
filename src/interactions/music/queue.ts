@@ -17,8 +17,8 @@ class Queue extends InteractionCommand {
       category: 'Music',
       command: new SlashCommandBuilder()
         .setName('queue')
-        .setDMPermission(false)
         .setDescription('List current msuic queue')
+        .setDMPermission(false)
         .toJSON(),
     });
   }

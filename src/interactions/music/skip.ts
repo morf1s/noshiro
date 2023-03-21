@@ -26,6 +26,7 @@ class Skip extends InteractionCommand {
             .setRequired(false)
             .setAutocomplete(true)
         )
+        .setDMPermission(false)
         .toJSON(),
     });
   }

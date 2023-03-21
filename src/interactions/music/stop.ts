@@ -18,6 +18,7 @@ class Stop extends InteractionCommand {
       command: new SlashCommandBuilder()
         .setName('stop')
         .setDescription('Stop the music and clear the queue')
+        .setDMPermission(false)
         .toJSON(),
     });
   }
