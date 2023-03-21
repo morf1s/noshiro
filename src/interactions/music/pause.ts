@@ -1,11 +1,12 @@
+import {
+    Colors,
+    CommandInteraction,
+    EmbedBuilder,
+    SlashCommandBuilder,
+  } from 'discord.js';
+
 import Noshiro from '@/sturctures/Noshiro';
 import InteractionCommand from '@/sturctures/InteractionCommand';
-import {
-  Colors,
-  CommandInteraction,
-  EmbedBuilder,
-  SlashCommandBuilder,
-} from 'discord.js';
 
 class Pause extends InteractionCommand {
   constructor(client: Noshiro) {
