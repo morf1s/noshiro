@@ -40,7 +40,7 @@ class Music extends Kazagumo {
 
     this.on('playerEmpty', async (player) => {
       setTimeout(() => {
-        if (!player.queue.size) player.disconnect();
+        if (!player.queue.size) player.destroy();
       }, 30000);
     }).on('playerStart', async (player, track) => {
       const channel = (await this.client.channels.fetch(
@@ -81,6 +81,11 @@ class Music extends Kazagumo {
     player: KazagumoPlayer,
     ctx: CommandInteraction
   ): boolean {
+    if (
+      member.permissions.has('Administrator') ||
+      this.client.owners[member.id]
+    )
+      return true;
     const voice = member.voice;
     const embed = new EmbedBuilder()
       .setDescription(
