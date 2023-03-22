@@ -104,3 +104,6 @@ dist
 # TernJS port file
 .tern-port
 testy.ts
+
+docker-compose.yml
+application.yml
