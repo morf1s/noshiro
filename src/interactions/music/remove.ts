@@ -11,19 +11,19 @@ import {
 import InteractionCommand from '@/sturctures/InteractionCommand';
 import Noshiro from '@/sturctures/Noshiro';
 
-class Skip extends InteractionCommand {
+class Remove extends InteractionCommand {
   constructor(client: Noshiro) {
     super({
       client,
       category: 'Music',
       command: new SlashCommandBuilder()
-        .setName('skip')
-        .setDescription('Skip current music')
+        .setName('remove')
+        .setDescription('Remove a spefic music you choose')
         .addStringOption((option) =>
           option
             .setName('track')
-            .setDescription('The Track you want to skip to')
-            .setRequired(false)
+            .setDescription('The Track you want to remove')
+            .setRequired(true)
             .setAutocomplete(true)
         )
         .setDMPermission(false)
@@ -36,7 +36,7 @@ class Skip extends InteractionCommand {
 
     if (ctx.isAutocomplete()) {
       let result: ApplicationCommandOptionChoiceData[] = [];
-      const trackSearch = ctx.options.get('track');
+      const trackSearch = ctx.options.get('track', true);
       if (player) {
         if (trackSearch?.value) {
           const regex = new RegExp(`${trackSearch.value}`, 'i');
@@ -58,6 +58,7 @@ class Skip extends InteractionCommand {
       ctx.respond(result);
       return;
     }
+
     await ctx.deferReply();
 
     if (!player) {
@@ -80,25 +81,29 @@ class Skip extends InteractionCommand {
     )
       return;
 
-    const searchTrack = ctx.options.get('track');
-    if (searchTrack) {
-      const track = player.queue.find(
-        (track) => track.identifier === searchTrack.value
-      );
-      if (track) {
-        // idk player.queue.previous is empty after player.play(), so...
-        const lastPlayed = player.queue.current?.getRaw();
-        await player.play(track);
-        const trackIndex = player.queue.findIndex(
-          (track) => track.identifier === lastPlayed?.info.identifier
-        );
-        if (trackIndex >= 0) player.queue.remove(trackIndex);
-      }
-    } else player.skip();
+    const searchTrack = ctx.options.get('track', true);
+    const choosedTrack = player.queue.find(
+      (track) => track.identifier === searchTrack.value
+    );
+    if (!choosedTrack) {
+      const embed = new EmbedBuilder()
+        .setDescription('Looks like the track you choosed is not in the queue')
+        .setColor(Colors.Orange);
+      ctx.editReply({
+        embeds: [embed],
+      });
+      return;
+    }
 
-    ctx.editReply('Skipping current track.');
+    const trackIndex = player.queue.findIndex(
+      (track) => track.identifier === choosedTrack.identifier
+    );
+
+    player.queue.remove(trackIndex);
+
+    ctx.editReply(`**\`${choosedTrack.title}\`** removed from the queue`);
     return;
   }
 }
 
-export default Skip;
+export default Remove;

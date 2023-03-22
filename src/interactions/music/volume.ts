@@ -24,6 +24,7 @@ class Volume extends InteractionCommand {
             .setMaxValue(100)
             .setRequired(true)
         )
+        .setDMPermission(false)
         .toJSON(),
     });
   }

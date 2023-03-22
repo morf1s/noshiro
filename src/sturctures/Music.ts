@@ -40,12 +40,15 @@ class Music extends Kazagumo {
 
     this.on('playerEmpty', async (player) => {
       setTimeout(() => {
-        if (!player.queue.size) player.destroy();
+        const playerExists = this.players.get(player.guildId);
+        if (!player.queue.size && playerExists) player.destroy();
       }, 30000);
     }).on('playerStart', async (player, track) => {
       const channel = (await this.client.channels.fetch(
         player.textId
       )) as TextChannel;
+
+      const user = track.requester as User;
       if (channel)
         channel.send({
           embeds: [
@@ -65,11 +68,11 @@ class Music extends Kazagumo {
                   })}\`**`,
                   inline: true,
                 },
-                {
-                  name: 'Requester',
-                  value: `<@${(track.requester as User).id}>`,
-                },
               ])
+              .setFooter({
+                text: `Request By: ${user.username}`,
+                iconURL: user.displayAvatarURL(),
+              })
               .setColor(Colors.Blurple),
           ],
         });

@@ -2,61 +2,48 @@ import {
     Colors,
     CommandInteraction,
     EmbedBuilder,
-    GuildMember,
     SlashCommandBuilder,
   } from 'discord.js';
 
 import Noshiro from '@/sturctures/Noshiro';
 import InteractionCommand from '@/sturctures/InteractionCommand';
 
-
-class Stop extends InteractionCommand {
+class Pause extends InteractionCommand {
   constructor(client: Noshiro) {
     super({
       client,
       category: 'Music',
       command: new SlashCommandBuilder()
-        .setName('stop')
-        .setDescription('Stop the music and clear the queue')
+        .setName('queue')
         .setDMPermission(false)
+        .setDescription('List current msuic queue')
         .toJSON(),
     });
   }
 
   async run(ctx: CommandInteraction) {
     await ctx.deferReply();
-
     const player = this.client.music.getPlayer(ctx.guildId as string);
     if (!player) {
       ctx.editReply({
         embeds: [
           new EmbedBuilder()
-            .setDescription('Queue is empty')
+            .setDescription('Queue is empty, nothing to pause here')
             .setColor(Colors.White),
         ],
       });
       return;
     }
 
-    if (
-      !this.client.music.isQueuesRequester(
-        ctx.member as GuildMember,
-        player,
-        ctx
-      )
-    )
-      return;
-
-    player.queue.clear();
-    player.skip();
-
+    player.pause(!player.paused);
     const embed = new EmbedBuilder()
-      .setDescription('Music stopped and queues cleared')
+      .setDescription(`Player has been ${player.paused ? 'paused' : 'resumed'}`)
       .setColor(Colors.Blurple);
+
     ctx.editReply({
       embeds: [embed],
     });
   }
 }
 
-export default Stop;
+export default Pause;
