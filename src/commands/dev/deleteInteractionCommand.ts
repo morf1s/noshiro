@@ -34,7 +34,7 @@ class DeleteInteractionCommands extends Command {
     }
 
     message.reply(
-      `${commands.toJSON().length} interaction commands has been registered.`
+      `${commands.toJSON().length} deleted successfully.`
     );
   }
 }
