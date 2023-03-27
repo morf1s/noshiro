@@ -14,9 +14,9 @@ class Pause extends InteractionCommand {
       client,
       category: 'Music',
       command: new SlashCommandBuilder()
-        .setName('queue')
+        .setName('pause')
         .setDMPermission(false)
-        .setDescription('List current msuic queue')
+        .setDescription('Pause/Unpause music')
         .toJSON(),
     });
   }
